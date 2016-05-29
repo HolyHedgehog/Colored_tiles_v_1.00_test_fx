@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<Pane xmlns:fx="http://javafx.com/fxml/1" fx:id="parrentPane" cacheHint="SCALE_AND_ROTATE" maxHeight="400.0"
+      maxWidth="600.0"
+      minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
+    <FlowPane fx:id="gameField" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0"/>
+    <FlowPane fx:id="moveButtons" alignment="BOTTOM_RIGHT" columnHalignment="CENTER" layoutX="400.0" layoutY="200.0"
+              maxHeight="200.0" maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0"
+              prefWidth="200.0" rowValignment="BASELINE"/>
+    <Pane fx:id="controlButtonsPane" layoutX="400.0" maxHeight="200.0" maxWidth="200.0" minHeight="200.0"
+          minWidth="200.0" prefHeight="200.0" prefWidth="200.0"/>
+</Pane>
