@@ -7,17 +7,12 @@ import javafx.scene.layout.Pane;
 
 public class Controller {
 
-
+    public Pane parrentPane;
+    public FlowPane gameField;
     public Pane controlButtonsPane;
     public FlowPane moveButtons;
-    public FlowPane gameField;
 
     public Button initializeField;
-    public Pane parrentPane;
-
-    public static void main(String[] args) {
-
-    }
 
     public void InitializeFieldButton(ActionEvent actionEvent) {
         for (int i = 0; i < 10; i++) {
