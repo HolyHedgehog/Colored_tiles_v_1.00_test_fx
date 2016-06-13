@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="parrentPane"
-            maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0"
-            prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="parrentPane" maxHeight="1.7976931348623157E308"
+            maxWidth="1.7976931348623157E308"
+            minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8" fx:controller="sample.Controller">
     <children>
         <FlowPane fx:id="gameField" maxHeight="Infinity" maxWidth="Infinity" minHeight="400" minWidth="400"
                   prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                   AnchorPane.topAnchor="0.0"/>
-        <FlowPane fx:id="moveButtons" layoutX="400.0" layoutY="200.0"
-                  maxHeight="1.7976931348623157E308" maxWidth="200.0" minHeight="200.0" minWidth="200.0"
-                  prefHeight="200.0" prefWidth="200.0"
+        <FlowPane fx:id="moveButtons" layoutX="400.0" layoutY="200.0" maxHeight="1.7976931348623157E308"
+                  maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0"
                   AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
         <Pane fx:id="controlButtonsPane" layoutX="400.0" maxHeight="1.7976931348623157E308" maxWidth="200.0"
-              minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0"
-              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
             <children>
-                <Button fx:id="initializeField" layoutX="14.0" layoutY="22.0"
-                        onAction="#InitializeFieldButton" text="добавить ячейки" textAlignment="CENTER"
-                >
+                <Button fx:id="initializeField" onAction="#newGameStart" text="Новая игра"
+                        textAlignment="CENTER">
                 </Button>
             </children>
         </Pane>

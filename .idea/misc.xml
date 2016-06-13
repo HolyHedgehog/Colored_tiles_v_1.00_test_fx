@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <entry_points version="2.0" />
+    <entry_points version="2.0">
+      <entry_point TYPE="method" FQNAME="sample.ColorCell ColorCell(int x, int y, int color, int owner)" />
+      <entry_point TYPE="class" FQNAME="sample.ColorCell" />
+      <entry_point TYPE="method" FQNAME="sample.Controller void InitializeFieldButton(javafx.event.ActionEvent actionEvent)" />
+      <entry_point TYPE="field" FQNAME="sample.Controller initializeField" />
+      <entry_point TYPE="field" FQNAME="sample.Controller moveButtons" />
+      <entry_point TYPE="field" FQNAME="sample.Controller controlButtonsPane" />
+      <entry_point TYPE="field" FQNAME="sample.Controller gameField" />
+      <entry_point TYPE="field" FQNAME="sample.Controller parrentPane" />
+      <entry_point TYPE="class" FQNAME="sample.Controller" />
+      <entry_point TYPE="method" FQNAME="sample.Main void main(java.lang.String[] args)" />
+      <entry_point TYPE="class" FQNAME="sample.Main" />
+    </entry_points>
   </component>
   <component name="ProjectKey">
     <option name="state" value="project://e79810c8-c5c8-43b1-b19c-90c1f4095425" />

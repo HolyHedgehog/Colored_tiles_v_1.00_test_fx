@@ -3,24 +3,25 @@ package sample;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
-import java.util.Random;
 
+class ColorCell extends Button {
 
-public class ColorCell extends Button {
-    private int XCoord;
-    private int YCoord;
-    private int Color;
-    private int Owner;
+    private final int xCoord;
 
+    private final int yCoord;
+
+    private int color;
+
+    private int owner;
 
     public ColorCell(int x, int y, int color) {
         super();
-        XCoord = x;
-        YCoord = y;
-        Color = color;
+        xCoord = x;
+        yCoord = y;
+        this.color = color;
+
         this.setPrefSize(40, 40);
-        Random r = new Random();
-        switch (r.nextInt(6)) {
+        switch (color) {
             case 0:
                 this.setStyle("-fx-background-color:red");
                 break;
@@ -43,13 +44,37 @@ public class ColorCell extends Button {
                 this.setStyle("-fx-background-color:black");
                 break;
         }
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> click());
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> leftCkickEvent());
+//        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Controller.controllerListener(this));
     }
 
 
-    private void click() {
-        System.out.println("i'am button with coords: " + XCoord + " " + YCoord);
+    private void leftCkickEvent() {
+        System.out.println("i'am button with coords: " + xCoord + " " + yCoord + ". My owner is " + owner);
 
     }
 
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(final int owner) {
+        this.owner = owner;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(final int color) {
+        this.color = color;
+    }
+
+    public int getxCoord() {
+        return xCoord;
+    }
+
+    public int getyCoord() {
+        return yCoord;
+    }
 }
