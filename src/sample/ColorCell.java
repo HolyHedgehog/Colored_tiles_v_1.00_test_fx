@@ -1,17 +1,16 @@
 package sample;
 
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 
 class ColorCell extends Button {
-
+    //координата по иксу
     private final int xCoord;
-
+    //координата по игрику
     private final int yCoord;
-
+    //цвет кнопки
     private int color;
-
+    //принадлежность к какому либо игроку. 1 - игрок. 2 - комп(противник)
     private int owner;
 
     public ColorCell(int x, int y, int color) {
@@ -44,15 +43,8 @@ class ColorCell extends Button {
                 this.setStyle("-fx-background-color:black");
                 break;
         }
-        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> leftCkickEvent());
-//        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Controller.controllerListener(this));
     }
 
-
-    private void leftCkickEvent() {
-        System.out.println("i'am button with coords: " + xCoord + " " + yCoord + ". My owner is " + owner);
-
-    }
 
     public int getOwner() {
         return owner;
