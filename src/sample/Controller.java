@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Controller {
+    private static ColorCell oponentStartCell;
+    private static ColorCell playerStartCell;
     private static ColorCell[][] gameFieldButtons = new ColorCell[10][10];
     //корневой компонент
     public Pane parrentPane;
@@ -39,6 +41,8 @@ public class Controller {
         ((ColorCell) gameField.getChildren().get(0)).setOwner(1);
         ((ColorCell) gameField.getChildren().get(gameField.getChildren().size() - 1)).setOwner(2);
 
+        playerStartCell = (ColorCell) gameField.getChildren().get(0);
+        oponentStartCell = (ColorCell) gameField.getChildren().get(gameField.getChildren().size() - 1);
 
     }
 
@@ -49,11 +53,13 @@ public class Controller {
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
     private void onClickButton(ColorCell clickedCell) {
-        List<ColorCell> cellsForMove = getCellsForPlayer(1);
+//        List<ColorCell> cellsForMove = getCellsForPlayer(1);
 
-        for (ColorCell cell : cellsForMove) {
-            move(cell, clickedCell.getColor(), clickedCell.getOwner());
-        }
+//        for (ColorCell cell : cellsForMove) {
+//            move(cell, clickedCell.getColor(), clickedCell.getOwner());
+//        }
+        move(playerStartCell, clickedCell.getColor(), 1);
+
     }
 
     private List<ColorCell> getCellsForPlayer(int owner) {
@@ -68,12 +74,22 @@ public class Controller {
     }
 
     private void move(ColorCell cell, int color, int owner) {
+        if (cell.isChanged()) {
+            return;
+        }
         cell.setColor(color);
         cell.setOwner(owner);
+        cell.setChanged(true);
         //дальше определяем какие соседние клетки можно отожрать.
+        cell.refresh();
+        unchanged(cell);
+
 
 
     }
 
+    private void unchanged(ColorCell cell) {
+        cell.setChanged(false);
+    }
 
 }

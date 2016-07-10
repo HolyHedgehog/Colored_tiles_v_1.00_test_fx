@@ -79,4 +79,30 @@ class ColorCell extends Button {
     public void setChanged(boolean changed) {
         this.changed = changed;
     }
+
+    public void refresh() {
+        switch (color) {
+            case 0:
+                this.setStyle("-fx-background-color:#8c0c0a");
+                break;
+            case 1:
+                this.setStyle("-fx-background-color:green");
+                break;
+            case 2:
+                this.setStyle("-fx-background-color:#000084");
+                break;
+            case 3:
+                this.setStyle("-fx-background-color:#46b9b7");
+                break;
+            case 4:
+                this.setStyle("-fx-background-color:#950095");
+                break;
+            case 5:
+                this.setStyle("-fx-background-color:#959500");
+                break;
+            default:
+                this.setStyle("-fx-background-color:black");
+                break;
+        }
+    }
 }
