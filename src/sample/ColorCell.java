@@ -12,6 +12,8 @@ class ColorCell extends Button {
     private int color;
     //принадлежность к какому либо игроку. 1 - игрок. 2 - комп(противник)
     private int owner;
+    //маркер. вызывался ли Controller.move() для этой ячейки.
+    private boolean changed;
 
     public ColorCell(int x, int y, int color) {
         super();
@@ -22,22 +24,22 @@ class ColorCell extends Button {
         this.setPrefSize(40, 40);
         switch (color) {
             case 0:
-                this.setStyle("-fx-background-color:red");
+                this.setStyle("-fx-background-color:#8c0c0a");
                 break;
             case 1:
                 this.setStyle("-fx-background-color:green");
                 break;
             case 2:
-                this.setStyle("-fx-background-color:blue");
+                this.setStyle("-fx-background-color:#000084");
                 break;
             case 3:
-                this.setStyle("-fx-background-color:teal");
+                this.setStyle("-fx-background-color:#46b9b7");
                 break;
             case 4:
-                this.setStyle("-fx-background-color:magenta");
+                this.setStyle("-fx-background-color:#950095");
                 break;
             case 5:
-                this.setStyle("-fx-background-color:yellow");
+                this.setStyle("-fx-background-color:#959500");
                 break;
             default:
                 this.setStyle("-fx-background-color:black");
@@ -68,5 +70,13 @@ class ColorCell extends Button {
 
     public int getyCoord() {
         return yCoord;
+    }
+
+    public boolean isChanged() {
+        return changed;
+    }
+
+    public void setChanged(boolean changed) {
+        this.changed = changed;
     }
 }

@@ -11,15 +11,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Controller {
-
+    private static ColorCell[][] gameFieldButtons = new ColorCell[10][10];
+    //корневой компонент
     public Pane parrentPane;
-
+    //компонент игрового поля
     public FlowPane gameField;
-
+    //компонент органов управления
     public Pane controlButtonsPane;
-
+    //компонента с кнопками вариантов хода
     public FlowPane moveButtons;
-
+    //кнопка из controlButtonsPane
     public Button initializeField;
 
     /* Создаём кнопки поля, и помещяем их на панель.
@@ -30,7 +31,8 @@ public class Controller {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 ColorCell newCell = new ColorCell(i, j, randGen.nextInt(6));
-                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> move(newCell));
+                gameFieldButtons[i][j] = newCell;
+                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> onClickButton(newCell));
                 gameField.getChildren().add(newCell);
             }
         }
@@ -44,27 +46,34 @@ public class Controller {
         return gameField;
     }
 
-    private void move(ColorCell cell) {
-        getCellsForPlayer(cell);
 
+    // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
+    private void onClickButton(ColorCell clickedCell) {
+        List<ColorCell> cellsForMove = getCellsForPlayer(1);
+
+        for (ColorCell cell : cellsForMove) {
+            move(cell, clickedCell.getColor(), clickedCell.getOwner());
+        }
     }
 
-    private List<ColorCell> getCellsForPlayer(ColorCell cell) {
-        System.out.println("i'am button with coords: " + cell.getxCoord() + " " + cell.getyCoord() + ". My owner is " + cell.getOwner());
+    private List<ColorCell> getCellsForPlayer(int owner) {
 
-        List<ColorCell> e = new ArrayList<>();
+        List<ColorCell> result = new ArrayList<>();
         for (Node x : getGameField().getChildren()) {
-            if ((x instanceof ColorCell) && (((ColorCell) x).getOwner() == 1)) {
-                e.add((ColorCell) x);
+            if ((x instanceof ColorCell) && (((ColorCell) x).getOwner() == owner)) {
+                result.add((ColorCell) x);
             }
         }
-
-
-        return null;
+        return result;
     }
 
-    private void isReady(ColorCell cell) {
+    private void move(ColorCell cell, int color, int owner) {
+        cell.setColor(color);
+        cell.setOwner(owner);
+        //дальше определяем какие соседние клетки можно отожрать.
+
 
     }
+
 
 }
