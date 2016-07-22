@@ -15,6 +15,9 @@ class ColorCell extends Button {
     //маркер. вызывался ли Controller.move() для этой ячейки.
     private boolean changed;
 
+    public static final int PLAYER = 1;
+    public static final int OPONENT = 2;
+
     public ColorCell(int x, int y, int color) {
         super();
         xCoord = x;
