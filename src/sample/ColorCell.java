@@ -50,7 +50,6 @@ class ColorCell extends Button {
         }
     }
 
-
     public int getOwner() {
         return owner;
     }

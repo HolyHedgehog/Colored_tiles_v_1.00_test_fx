@@ -96,6 +96,7 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
+
         if ((x - 1 >= 0) && (gameFieldButtons[x - 1][y].getOwner() == 0) && (gameFieldButtons[x - 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x - 1][y].isChanged())) {
             gameFieldButtons[x - 1][y].setChanged(true);
             gameFieldButtons[x - 1][y].setColor(color);
