@@ -96,12 +96,10 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-
         if ((x - 1 >= 0) && (gameFieldButtons[x - 1][y].getOwner() == 0) && (gameFieldButtons[x - 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x - 1][y].isChanged())) {
             gameFieldButtons[x - 1][y].setChanged(true);
             gameFieldButtons[x - 1][y].setColor(color);
             gameFieldButtons[x - 1][y].setOwner(owner);
-
             move2(gameFieldButtons[x - 1][y], cell.getColor(), cell.getOwner());
         }
         if ((x + 1 <= 9) && (gameFieldButtons[x + 1][y].getOwner() == 0) && (gameFieldButtons[x + 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x + 1][y].isChanged())) {
