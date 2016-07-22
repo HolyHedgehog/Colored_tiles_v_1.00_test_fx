@@ -58,7 +58,9 @@ public class Controller {
 //        for (ColorCell cell : cellsForMove) {
 //            move(cell, clickedCell.getColor(), clickedCell.getOwner());
 //        }
-        move(playerStartCell, clickedCell.getColor(), 1);
+        move(gameFieldButtons[0][0], clickedCell.getColor(), 1);
+        unchanged();
+//        move(oponentStartCell,randomColor(),0);
 
     }
 
@@ -82,14 +84,29 @@ public class Controller {
         cell.setChanged(true);
         //дальше определяем какие соседние клетки можно отожрать.
         cell.refresh();
-        unchanged(cell);
+        int x = cell.getxCoord();
+        int y = cell.getyCoord();
 
-
+        if ((x - 1 >= 0) && (gameFieldButtons[x - 1][y].getOwner() == 0) && (gameFieldButtons[x - 1][y].getColor() == cell.getColor())) {
+            move(gameFieldButtons[x - 1][y], cell.getColor(), cell.getOwner());
+        }
+        if ((x + 1 <= 9) && (gameFieldButtons[x + 1][y].getOwner() == 0) && (gameFieldButtons[x + 1][y].getColor() == cell.getColor())) {
+            move(gameFieldButtons[x + 1][y], cell.getColor(), cell.getOwner());
+        }
+        if ((y - 1 >= 0) && (gameFieldButtons[x][y - 1].getOwner() == 0) && (gameFieldButtons[x][y - 1].getColor() == cell.getColor())) {
+            move(gameFieldButtons[x][y - 1], cell.getColor(), cell.getOwner());
+        }
+        if ((y + 1 <= 9) && (gameFieldButtons[x][y + 1].getOwner() == 0) && (gameFieldButtons[x][y + 1].getColor() == cell.getColor())) {
+            move(gameFieldButtons[x][y + 1], cell.getColor(), cell.getOwner());
+        }
 
     }
 
-    private void unchanged(ColorCell cell) {
-        cell.setChanged(false);
+    private void unchanged() {
+        for (Node cell : getGameField().getChildren()) {
+            ColorCell colorCell = (ColorCell) cell;
+            ((ColorCell) cell).setChanged(false);
+        }
     }
 
 }
