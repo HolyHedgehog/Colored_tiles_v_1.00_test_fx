@@ -15,11 +15,6 @@ class ColorCell extends Button {
     //маркер. вызывался ли Controller.move() для этой ячейки.
     private boolean changed;
 
-    public class Property {
-        public static final int PLAYER = 1;
-        public static final int OPONENT = 2;
-    }
-
     public ColorCell(int x, int y, int color) {
         super();
         xCoord = x;
@@ -108,5 +103,11 @@ class ColorCell extends Button {
                 this.setStyle("-fx-background-color:black");
                 break;
         }
+    }
+
+    public class Property {
+        public static final int NEUTRAL = 0;
+        public static final int PLAYER = 1;
+        public static final int OPONENT = 2;
     }
 }

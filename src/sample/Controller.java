@@ -96,25 +96,25 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-        if ((x - 1 >= 0) && (gameFieldButtons[x - 1][y].getOwner() == 0) && (gameFieldButtons[x - 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x - 1][y].isChanged())) {
+        if ((x - 1 >= 0) && (gameFieldButtons[x - 1][y].getOwner() == ColorCell.Property.NEUTRAL) && (gameFieldButtons[x - 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x - 1][y].isChanged())) {
             gameFieldButtons[x - 1][y].setChanged(true);
             gameFieldButtons[x - 1][y].setColor(color);
             gameFieldButtons[x - 1][y].setOwner(owner);
             recurseMove(gameFieldButtons[x - 1][y], cell.getColor(), cell.getOwner());
         }
-        if ((x + 1 <= 9) && (gameFieldButtons[x + 1][y].getOwner() == 0) && (gameFieldButtons[x + 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x + 1][y].isChanged())) {
+        if ((x + 1 <= 9) && (gameFieldButtons[x + 1][y].getOwner() == ColorCell.Property.NEUTRAL) && (gameFieldButtons[x + 1][y].getColor() == cell.getColor()) && !(gameFieldButtons[x + 1][y].isChanged())) {
             gameFieldButtons[x + 1][y].setChanged(true);
             gameFieldButtons[x + 1][y].setColor(color);
             gameFieldButtons[x + 1][y].setOwner(owner);
             recurseMove(gameFieldButtons[x + 1][y], cell.getColor(), cell.getOwner());
         }
-        if ((y - 1 >= 0) && (gameFieldButtons[x][y - 1].getOwner() == 0) && (gameFieldButtons[x][y - 1].getColor() == cell.getColor()) && !(gameFieldButtons[x][y - 1].isChanged())) {
+        if ((y - 1 >= 0) && (gameFieldButtons[x][y - 1].getOwner() == ColorCell.Property.NEUTRAL) && (gameFieldButtons[x][y - 1].getColor() == cell.getColor()) && !(gameFieldButtons[x][y - 1].isChanged())) {
             gameFieldButtons[x][y - 1].setChanged(true);
             gameFieldButtons[x][y - 1].setColor(color);
             gameFieldButtons[x][y - 1].setOwner(owner);
             recurseMove(gameFieldButtons[x][y - 1], cell.getColor(), cell.getOwner());
         }
-        if ((y + 1 <= 9) && (gameFieldButtons[x][y + 1].getOwner() == 0) && (gameFieldButtons[x][y + 1].getColor() == cell.getColor()) && !(gameFieldButtons[x][y + 1].isChanged())) {
+        if ((y + 1 <= 9) && (gameFieldButtons[x][y + 1].getOwner() == ColorCell.Property.NEUTRAL) && (gameFieldButtons[x][y + 1].getColor() == cell.getColor()) && !(gameFieldButtons[x][y + 1].isChanged())) {
             gameFieldButtons[x][y + 1].setChanged(true);
             gameFieldButtons[x][y + 1].setColor(color);
             gameFieldButtons[x][y + 1].setOwner(owner);
