@@ -137,9 +137,23 @@ public class Controller {
     }
 
     private void CellChange(int x, int y, int color, int owner) {
+        perfmove[color]++;
         gameFieldButtons[x][y].setChanged(true);
         gameFieldButtons[x][y].setOwner(owner);
         recurseMove(gameFieldButtons[x][y], color, owner);
+    }
+
+    private static int[] perfmove = new int[6];
+
+    private void perfectMove() {
+        int x = 9;
+        int y = 9;
+        perfmove = new int[6];
+        for (int i = 0; i < 6; i++) {
+            for (ColorCell cell : getCellsForPlayer(oponentStartCell.getOwner())) {
+                recurseMove(cell, i, ColorCell.Property.NEUTRAL);
+            }
+        }
     }
 
 
