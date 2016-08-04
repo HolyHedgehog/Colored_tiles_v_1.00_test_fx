@@ -14,19 +14,15 @@ public class Controller {
     private static ColorCell oponentStartCell;
     private static ColorCell playerStartCell;
     private static ColorCell[][] gameFieldButtons = new ColorCell[10][10];
-
+    private static int[] perfmove = new int[6];
     //корневой компонент
     public Pane parrentPane;
-
     //компонент игрового поля
     public FlowPane gameField;
-
     //компонент органов управления
     public Pane controlButtonsPane;
-
     //компонента с кнопками вариантов хода
     public FlowPane moveButtons;
-
     //кнопка из controlButtonsPane
     public Button initializeField;
 
@@ -53,6 +49,11 @@ public class Controller {
         playerStartCell = gameFieldButtons[0][0];
         oponentStartCell = gameFieldButtons[9][9];
 
+        if (playerStartCell.getColor() == oponentStartCell.getColor()) {
+            oponentStartCell.setColor(randomColor());
+            oponentStartCell.refresh();
+        }
+
         recurseMove(playerStartCell, playerStartCell.getColor(), ColorCell.Property.PLAYER);
         recurseMove(oponentStartCell, oponentStartCell.getColor(), ColorCell.Property.OPONENT);
     }
@@ -60,7 +61,6 @@ public class Controller {
     private FlowPane getGameField() {
         return gameField;
     }
-
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
     private void onClickButton(ColorCell clickedCell) {
@@ -113,7 +113,6 @@ public class Controller {
             CellChange(x, y + 1, color, owner);
     }
 
-
     private void setAllCellsUnchanged() {
         for (Node cell : getGameField().getChildren()) {
             ColorCell colorCell = (ColorCell) cell;
@@ -142,8 +141,6 @@ public class Controller {
         gameFieldButtons[x][y].setOwner(owner);
         recurseMove(gameFieldButtons[x][y], color, owner);
     }
-
-    private static int[] perfmove = new int[6];
 
     private void perfectMove() {
         int x = 9;
