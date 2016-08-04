@@ -64,9 +64,11 @@ public class Controller {
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
     private void onClickButton(ColorCell clickedCell) {
-
-        preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
-        preRecurseMove(randomColor(), ColorCell.Property.OPONENT);
+        if ((clickedCell.getColor() != playerStartCell.getColor()) &&
+                (clickedCell.getColor() != oponentStartCell.getColor())) {
+            preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
+            preRecurseMove(randomColor(), ColorCell.Property.OPONENT);
+        }
 
     }
 
@@ -97,45 +99,17 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-        if ((x - 1 >= 0)
-                && (gameFieldButtons[x - 1][y].getOwner() == ColorCell.Property.NEUTRAL)
-                && (gameFieldButtons[x - 1][y].getColor() == color)
-                && !(gameFieldButtons[x - 1][y].isChanged())) {
+        if ((x - 1 >= 0) && CellCanChange(x - 1, y, color))
+            CellChange(x - 1, y, color, owner);
 
-            gameFieldButtons[x - 1][y].setChanged(true);
-            gameFieldButtons[x - 1][y].setOwner(owner);
-            recurseMove(gameFieldButtons[x - 1][y], color, owner);
-        }
+        if ((x + 1 <= 9) && CellCanChange(x + 1, y, color))
+            CellChange(x + 1, y, color, owner);
 
-        if ((x + 1 <= 9)
-                && (gameFieldButtons[x + 1][y].getOwner() == ColorCell.Property.NEUTRAL)
-                && (gameFieldButtons[x + 1][y].getColor() == color)
-                && !(gameFieldButtons[x + 1][y].isChanged())) {
+        if ((y - 1 >= 0) && CellCanChange(x, y - 1, color))
+            CellChange(x, y - 1, color, owner);
 
-            gameFieldButtons[x + 1][y].setChanged(true);
-            gameFieldButtons[x + 1][y].setOwner(owner);
-            recurseMove(gameFieldButtons[x + 1][y], color, owner);
-        }
-
-        if ((y - 1 >= 0)
-                && (gameFieldButtons[x][y - 1].getOwner() == ColorCell.Property.NEUTRAL)
-                && (gameFieldButtons[x][y - 1].getColor() == color)
-                && !(gameFieldButtons[x][y - 1].isChanged())) {
-
-            gameFieldButtons[x][y - 1].setChanged(true);
-            gameFieldButtons[x][y - 1].setOwner(owner);
-            recurseMove(gameFieldButtons[x][y - 1], color, owner);
-        }
-
-        if ((y + 1 <= 9)
-                && (gameFieldButtons[x][y + 1].getOwner() == ColorCell.Property.NEUTRAL)
-                && (gameFieldButtons[x][y + 1].getColor() == color)
-                && !(gameFieldButtons[x][y + 1].isChanged())) {
-
-            gameFieldButtons[x][y + 1].setChanged(true);
-            gameFieldButtons[x][y + 1].setOwner(owner);
-            recurseMove(gameFieldButtons[x][y + 1], color, owner);
-        }
+        if ((y + 1 <= 9) && CellCanChange(x, y + 1, color))
+            CellChange(x, y + 1, color, owner);
     }
 
 
@@ -154,5 +128,19 @@ public class Controller {
         } while (result == playerStartCell.getColor() || result == oponentStartCell.getColor());
         return result;
     }
+
+    private boolean CellCanChange(int x, int y, int color) {
+
+        return (gameFieldButtons[x][y].getOwner() == ColorCell.Property.NEUTRAL)
+                && (gameFieldButtons[x][y].getColor() == color)
+                && !(gameFieldButtons[x][y].isChanged());
+    }
+
+    private void CellChange(int x, int y, int color, int owner) {
+        gameFieldButtons[x][y].setChanged(true);
+        gameFieldButtons[x][y].setOwner(owner);
+        recurseMove(gameFieldButtons[x][y], color, owner);
+    }
+
 
 }
