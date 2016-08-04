@@ -83,6 +83,7 @@ public class Controller {
         return result;
     }
 
+    //первая половина хода. не вышло уместить в 1 метод.
     private void preRecurseMove(int color, int owner) {
         for (ColorCell cell : getCellsForPlayer(owner)) {
             cell.setColor(color);
@@ -123,9 +124,8 @@ public class Controller {
     private int randomColor() {
         Random rand = new Random();
         int result;
-        do {
-            result = rand.nextInt(6);
-        } while (result == playerStartCell.getColor() || result == oponentStartCell.getColor());
+        do result = rand.nextInt(6);
+        while (result == playerStartCell.getColor() || result == oponentStartCell.getColor());
         return result;
     }
 
