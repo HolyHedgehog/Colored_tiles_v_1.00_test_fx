@@ -67,7 +67,7 @@ public class Controller {
         if ((clickedCell.getColor() != playerStartCell.getColor()) &&
                 (clickedCell.getColor() != oponentStartCell.getColor())) {
             preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
-            preRecurseMove(randomColor(), ColorCell.Property.OPONENT);
+            preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
         }
 
     }
@@ -141,6 +141,20 @@ public class Controller {
         gameFieldButtons[x][y].setOwner(owner);
         recurseMove(gameFieldButtons[x][y], color, owner);
     }
+
+    private int getPerfMove() {
+        int result = 0;
+        int index = 0;
+        perfectMove();
+        for (int i = 0; i < 6; i++) {
+            if (perfmove[i] > result) {
+                result = perfmove[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
 
     private void perfectMove() {
         int x = 9;
