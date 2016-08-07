@@ -146,11 +146,17 @@ public class Controller {
         int result = 0;
         int index = 0;
         perfectMove();
+        setAllCellsUnchanged();
         for (int i = 0; i < 6; i++) {
             if (perfmove[i] > result) {
                 result = perfmove[i];
                 index = i;
             }
+        }
+
+        while ((index == playerStartCell.getColor()) ||
+                (index == oponentStartCell.getColor())) {
+            index = randomColor();
         }
         return index;
     }
