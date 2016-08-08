@@ -144,23 +144,35 @@ public class Controller {
 
     private int getPerfMove() {
         int result = 0;
-        int index = 0;
+        int index;
         perfectMove();
         setAllCellsUnchanged();
-        for (int i = 0; i < 6; i++) {
-            if (perfmove[i] > result) {
-                result = perfmove[i];
-                index = i;
-            }
-        }
+        int ciclecounter = 0;   /// костыль от вечных циклов
 
-        while ((index == playerStartCell.getColor()) ||
-                (index == oponentStartCell.getColor())) {
-            index = randomColor();
-        }
+        do {
+            index = 0; //
+            for (int i = 0; i < 6; i++) {
+                if (perfmove[i] > result) {
+                    result = perfmove[i];
+                    index = i;
+                }
+            }
+
+            if ((index == playerStartCell.getColor()) || (index == oponentStartCell.getColor())) {
+                perfmove[index] = 0;
+                result = 0;
+            }
+
+            if (ciclecounter == 10) { //если насчитали 10 итераций - выход с рандомным значением.
+                return randomColor();
+            }
+
+            ciclecounter++;
+
+        } while ((index == playerStartCell.getColor()) || (index == oponentStartCell.getColor()));
+
         return index;
     }
-
 
     private void perfectMove() {
         int x = 9;
