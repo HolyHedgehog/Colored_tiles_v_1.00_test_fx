@@ -2,6 +2,7 @@ package sample;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -25,10 +26,14 @@ public class Controller {
     public FlowPane moveButtons;
     //кнопка из controlButtonsPane
     public Button initializeField;
+    public Label label1;
 
     /* Создаём кнопки поля, и помещяем их на панель.
      */
     public void newGameStart() {
+        moveCounter = 0;
+        playerCellsCounter = 1;
+        oponentCellsCounter = 1;
         gameField.getChildren().removeAll(gameField.getChildren());
 
         Random randGen = new Random();
@@ -66,10 +71,11 @@ public class Controller {
     private void onClickButton(ColorCell clickedCell) {
         if ((clickedCell.getColor() != playerStartCell.getColor()) &&
                 (clickedCell.getColor() != oponentStartCell.getColor())) {
+            moveCounter++;
             preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
+            printStatus();
         }
-
     }
 
     private List<ColorCell> getCellsForPlayer(int owner) {
@@ -136,6 +142,16 @@ public class Controller {
     }
 
     private void CellChange(int x, int y, int color, int owner) {
+        switch (owner) {
+            case 1:
+                playerCellsCounter++;
+                break;
+            case 2:
+                oponentCellsCounter++;
+                break;
+            default:
+                break;
+        }
         perfmove[color]++;
         gameFieldButtons[x][y].setChanged(true);
         gameFieldButtons[x][y].setOwner(owner);
@@ -183,6 +199,43 @@ public class Controller {
                 recurseMove(cell, i, ColorCell.Property.NEUTRAL);
             }
         }
+    }
+
+    private static int moveCounter = 0;
+
+    private static int playerCellsCounter;
+    private static int oponentCellsCounter;
+
+    private void printStatus() {
+//        вариант рабочий, но в целях оптимизации попробую пробросить из рекурсмува.
+//            получилось. не высчитываем каждый раз количество ячеек, а берём значение формирующиеся с учетом вызовов CellChange()
+//        int a = 0, oponentCellsCounter = 0, c = 0;
+//        for (Node x : gameField.getChildren()) {
+//            if (x instanceof ColorCell) {
+//                switch (((ColorCell) x).getOwner()) {
+//                    case 1:
+//                        a++;
+//                        break;
+//                    case 2:
+//                        oponentCellsCounter++;
+//                        break;
+//                    case 0:
+//                        c++;
+//                        break;
+//                    default:
+//                        System.out.println("ерунда какая то. не должно так быть.Controller#printStatus");
+//                }
+//            }
+//        }
+        System.out.println("Move №" + moveCounter);
+        System.out.println("Player - " + playerCellsCounter + "\n\r" +
+                "Comp - " + oponentCellsCounter + "\n\r" +
+                "Neutral - " + (100 - (oponentCellsCounter + playerCellsCounter)));
+        System.out.println("--- ✄ -----------------------");
+        label1.setText("Player - " + playerCellsCounter + "\n\r" +
+                "Comp - " + oponentCellsCounter + "\n\r" +
+                "Neutral - " + (100 - (oponentCellsCounter + playerCellsCounter)));
+
     }
 
 

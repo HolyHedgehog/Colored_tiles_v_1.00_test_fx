@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="parrentPane" maxHeight="1.7976931348623157E308"
             maxWidth="1.7976931348623157E308"
             minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
@@ -20,6 +23,9 @@
                 <Button fx:id="initializeField" onAction="#newGameStart" text="Новая игра"
                         textAlignment="CENTER">
                 </Button>
+                <Label fx:id="label1"
+                       layoutY="40">
+                </Label>
             </children>
         </Pane>
     </children>
