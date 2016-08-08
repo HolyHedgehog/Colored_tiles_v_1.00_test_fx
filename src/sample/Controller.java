@@ -1,5 +1,9 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,28 +11,42 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class Controller {
+
+    private static final int COLORQUANTITY = 6;
+
+    private static final int FIELDSIZE = 10;
+
+    // стартовая Ячейка опонента.
     private static ColorCell oponentStartCell;
+
+    // стартовая ячейка игрока
     private static ColorCell playerStartCell;
-    private static ColorCell[][] gameFieldButtons = new ColorCell[10][10];
-    private static int[] perfmove = new int[6];
-    //корневой компонент
+
+    private static ColorCell[][] gameFieldButtons = new ColorCell[FIELDSIZE][FIELDSIZE];
+
+    private static int[] perfmove = new int[COLORQUANTITY];
+
+    // корневой компонент
     public Pane parrentPane;
-    //компонент игрового поля
+
+    // компонент игрового поля
     public FlowPane gameField;
-    //компонент органов управления
+
+    // компонент органов управления
     public Pane controlButtonsPane;
-    //компонента с кнопками вариантов хода
+
+    // компонента с кнопками вариантов хода
     public FlowPane moveButtons;
-    //кнопка из controlButtonsPane
+
+    // кнопка из controlButtonsPane
     public Button initializeField;
+
+    // тестовый лейбл. вывод информации по партии.
     public Label label1;
 
-    /* Создаём кнопки поля, и помещяем их на панель.
+    /*
+     * Создаём кнопки поля, и помещяем их на панель.
      */
     public void newGameStart() {
         moveCounter = 0;
@@ -38,10 +56,10 @@ public class Controller {
 
         Random randGen = new Random();
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < FIELDSIZE; i++) {
+            for (int j = 0; j < FIELDSIZE; j++) {
 
-                ColorCell newCell = new ColorCell(i, j, randGen.nextInt(6));
+                ColorCell newCell = new ColorCell(i, j, randGen.nextInt(COLORQUANTITY));
                 gameFieldButtons[i][j] = newCell;
                 newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> onClickButton(newCell));
                 gameField.getChildren().add(newCell);
@@ -68,9 +86,9 @@ public class Controller {
     }
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
-    private void onClickButton(ColorCell clickedCell) {
-        if ((clickedCell.getColor() != playerStartCell.getColor()) &&
-                (clickedCell.getColor() != oponentStartCell.getColor())) {
+    private void onClickButton(final ColorCell clickedCell) {
+        if ((clickedCell.getColor() != playerStartCell.getColor())
+                && (clickedCell.getColor() != oponentStartCell.getColor())) {
             moveCounter++;
             preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
@@ -78,7 +96,7 @@ public class Controller {
         }
     }
 
-    private List<ColorCell> getCellsForPlayer(int owner) {
+    private List<ColorCell> getCellsForPlayer(final int owner) {
 
         List<ColorCell> result = new ArrayList<>();
         for (Node x : getGameField().getChildren()) {
@@ -89,8 +107,8 @@ public class Controller {
         return result;
     }
 
-    //первая половина хода. не вышло уместить в 1 метод.
-    private void preRecurseMove(int color, int owner) {
+    // первая половина хода. не вышло уместить в 1 метод.
+    private void preRecurseMove(final int color, final int owner) {
         for (ColorCell cell : getCellsForPlayer(owner)) {
             cell.setColor(color);
             cell.setChanged(true);
@@ -100,23 +118,26 @@ public class Controller {
         setAllCellsUnchanged();
     }
 
-    //дальше определяем какие соседние клетки можно отожрать.
-    private void recurseMove(ColorCell cell, int color, int owner) {
+    // дальше определяем какие соседние клетки можно отожрать.
+    private void recurseMove(final ColorCell cell, final int color, final int owner) {
 
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-        if ((x - 1 >= 0) && CellCanChange(x - 1, y, color))
+        if ((x - 1 >= 0) && CellCanChange(x - 1, y, color)) {
             CellChange(x - 1, y, color, owner);
-
-        if ((x + 1 <= 9) && CellCanChange(x + 1, y, color))
+        }
+        if ((x + 1 <= 9) && CellCanChange(x + 1, y, color)) {
             CellChange(x + 1, y, color, owner);
+        }
 
-        if ((y - 1 >= 0) && CellCanChange(x, y - 1, color))
+        if ((y - 1 >= 0) && CellCanChange(x, y - 1, color)) {
             CellChange(x, y - 1, color, owner);
+        }
 
-        if ((y + 1 <= 9) && CellCanChange(x, y + 1, color))
+        if ((y + 1 <= 9) && CellCanChange(x, y + 1, color)) {
             CellChange(x, y + 1, color, owner);
+        }
     }
 
     private void setAllCellsUnchanged() {
@@ -129,19 +150,20 @@ public class Controller {
     private int randomColor() {
         Random rand = new Random();
         int result;
-        do result = rand.nextInt(6);
-        while (result == playerStartCell.getColor() || result == oponentStartCell.getColor());
+        do {
+            result = rand.nextInt(COLORQUANTITY);
+        } while (result == playerStartCell.getColor() || result == oponentStartCell.getColor());
         return result;
     }
 
-    private boolean CellCanChange(int x, int y, int color) {
+    private boolean CellCanChange(final int x, final int y, final int color) {
 
         return (gameFieldButtons[x][y].getOwner() == ColorCell.Property.NEUTRAL)
                 && (gameFieldButtons[x][y].getColor() == color)
                 && !(gameFieldButtons[x][y].isChanged());
     }
 
-    private void CellChange(int x, int y, int color, int owner) {
+    private void CellChange(final int x, final int y, final int color, final int owner) {
         switch (owner) {
             case 1:
                 playerCellsCounter++;
@@ -163,11 +185,11 @@ public class Controller {
         int index;
         perfectMove();
         setAllCellsUnchanged();
-        int ciclecounter = 0;   /// костыль от вечных циклов
+        int ciclecounter = 0; /// костыль от вечных циклов
 
         do {
             index = 0; //
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < COLORQUANTITY; i++) {
                 if (perfmove[i] > result) {
                     result = perfmove[i];
                     index = i;
@@ -179,7 +201,7 @@ public class Controller {
                 result = 0;
             }
 
-            if (ciclecounter == 10) { //если насчитали 10 итераций - выход с рандомным значением.
+            if (ciclecounter == 10) { // если насчитали 10 итераций - выход с рандомным значением.
                 return randomColor();
             }
 
@@ -191,52 +213,64 @@ public class Controller {
     }
 
     private void perfectMove() {
-        int x = 9;
-        int y = 9;
-        perfmove = new int[6];
-        for (int i = 0; i < 6; i++) {
+        perfmove = new int[COLORQUANTITY];
+        for (int i = 0; i < COLORQUANTITY; i++) {
             for (ColorCell cell : getCellsForPlayer(oponentStartCell.getOwner())) {
                 recurseMove(cell, i, ColorCell.Property.NEUTRAL);
             }
         }
     }
 
+    // отсчитываем кол-во ходов.
     private static int moveCounter = 0;
 
+    // отсчитываем кол-во захваченных ячеек.
     private static int playerCellsCounter;
+
+    // отсчитываем кол-во захваченных ячеек.
     private static int oponentCellsCounter;
 
     private void printStatus() {
-//        вариант рабочий, но в целях оптимизации попробую пробросить из рекурсмува.
-//            получилось. не высчитываем каждый раз количество ячеек, а берём значение формирующиеся с учетом вызовов CellChange()
-//        int a = 0, oponentCellsCounter = 0, c = 0;
-//        for (Node x : gameField.getChildren()) {
-//            if (x instanceof ColorCell) {
-//                switch (((ColorCell) x).getOwner()) {
-//                    case 1:
-//                        a++;
-//                        break;
-//                    case 2:
-//                        oponentCellsCounter++;
-//                        break;
-//                    case 0:
-//                        c++;
-//                        break;
-//                    default:
-//                        System.out.println("ерунда какая то. не должно так быть.Controller#printStatus");
-//                }
-//            }
-//        }
+        // вариант рабочий, но в целях оптимизации попробую пробросить из рекурсмува.
+        // получилось. не высчитываем каждый раз количество ячеек, а берём значение формирующиеся с учетом вызовов
+        // CellChange()
+        // int a = 0, oponentCellsCounter = 0, c = 0;
+        // for (Node x : gameField.getChildren()) {
+        // if (x instanceof ColorCell) {
+        // switch (((ColorCell) x).getOwner()) {
+        // case 1:
+        // a++;
+        // break;
+        // case 2:
+        // oponentCellsCounter++;
+        // break;
+        // case 0:
+        // c++;
+        // break;
+        // default:
+        // System.out.println("ерунда какая то. не должно так быть.Controller#printStatus");
+        // }
+        // }
+        // }
         System.out.println("Move №" + moveCounter);
-        System.out.println("Player - " + playerCellsCounter + "\n\r" +
-                "Comp - " + oponentCellsCounter + "\n\r" +
-                "Neutral - " + (100 - (oponentCellsCounter + playerCellsCounter)));
+        System.out.println("Player - "
+                + playerCellsCounter
+                + "\n\r"
+                + "Comp - "
+                + oponentCellsCounter
+                + "\n\r"
+                + "Neutral - "
+                + (100 - (oponentCellsCounter + playerCellsCounter)));
         System.out.println("--- ✄ -----------------------");
-        label1.setText("Player - " + playerCellsCounter + "\n\r" +
-                "Comp - " + oponentCellsCounter + "\n\r" +
-                "Neutral - " + (100 - (oponentCellsCounter + playerCellsCounter)));
+        label1.setText("Player - "
+                + playerCellsCounter
+                + "\n\r"
+                + "Comp - "
+                + oponentCellsCounter
+                + "\n\r"
+                + "Neutral - "
+                + (100 - (oponentCellsCounter + playerCellsCounter)));
 
     }
-
 
 }
