@@ -124,18 +124,18 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-        if ((x - 1 >= 0) && CellCanChange(x - 1, y, color)) {
+        if ((x - 1 >= 0) && CanCellChange(x - 1, y, color)) {
             CellChange(x - 1, y, color, owner);
         }
-        if ((x + 1 <= 9) && CellCanChange(x + 1, y, color)) {
+        if ((x + 1 <= 9) && CanCellChange(x + 1, y, color)) {
             CellChange(x + 1, y, color, owner);
         }
 
-        if ((y - 1 >= 0) && CellCanChange(x, y - 1, color)) {
+        if ((y - 1 >= 0) && CanCellChange(x, y - 1, color)) {
             CellChange(x, y - 1, color, owner);
         }
 
-        if ((y + 1 <= 9) && CellCanChange(x, y + 1, color)) {
+        if ((y + 1 <= 9) && CanCellChange(x, y + 1, color)) {
             CellChange(x, y + 1, color, owner);
         }
     }
@@ -156,7 +156,7 @@ public class Controller {
         return result;
     }
 
-    private boolean CellCanChange(final int x, final int y, final int color) {
+    private boolean CanCellChange(final int x, final int y, final int color) {
 
         return (gameFieldButtons[x][y].getOwner() == ColorCell.Property.NEUTRAL)
                 && (gameFieldButtons[x][y].getColor() == color)
@@ -261,7 +261,7 @@ public class Controller {
                 + "\n\r"
                 + "Neutral - "
                 + (100 - (oponentCellsCounter + playerCellsCounter)));
-        System.out.println("--- ✄ -----------------------");
+        System.out.println("--------------------------");
         label1.setText("Player - "
                 + playerCellsCounter
                 + "\n\r"
