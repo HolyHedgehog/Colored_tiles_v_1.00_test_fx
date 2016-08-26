@@ -1,12 +1,14 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -27,6 +29,8 @@ public class Controller {
 
     private static int[] perfmove = new int[COLORQUANTITY];
 
+    private static int[] playerHasMove = new int[COLORQUANTITY];
+
     // корневой компонент
     public Pane parrentPane;
 
@@ -44,6 +48,10 @@ public class Controller {
 
     // тестовый лейбл. вывод информации по партии.
     public Label label1;
+
+    public ProgressBar oponent_bar;
+
+    public ProgressBar player_bar;
 
     /*
      * Создаём кнопки поля, и помещяем их на панель.
@@ -175,6 +183,7 @@ public class Controller {
                 break;
         }
         perfmove[color]++;
+        playerHasMove[color]++;
         gameFieldButtons[x][y].setChanged(true);
         gameFieldButtons[x][y].setOwner(owner);
         recurseMove(gameFieldButtons[x][y], color, owner);
@@ -219,6 +228,25 @@ public class Controller {
                 recurseMove(cell, i, ColorCell.Property.NEUTRAL);
             }
         }
+    }
+
+    private boolean ifPlayerHaveMove() {
+        playerHasMove = new int[COLORQUANTITY];
+        for (int i = 0; i < COLORQUANTITY; i++) {
+            for (ColorCell cell : getCellsForPlayer(playerStartCell.getOwner())) {
+                recurseMove(cell, i, ColorCell.Property.NEUTRAL);
+            }
+        }
+        System.out.println(Arrays.toString(playerHasMove));
+        if ((playerHasMove[0] == 0)
+                && (playerHasMove[1] == 0)
+                && (playerHasMove[2] == 0)
+                && (playerHasMove[3] == 0)
+                && (playerHasMove[4] == 0)
+                && (playerHasMove[5] == 0)) {
+            return false;
+        }
+        return true;
     }
 
     // отсчитываем кол-во ходов.
@@ -270,6 +298,9 @@ public class Controller {
                 + "\n\r"
                 + "Neutral - "
                 + (100 - (oponentCellsCounter + playerCellsCounter)));
+        player_bar.setProgress(((float) playerCellsCounter * 2) / 100);
+        oponent_bar.setProgress(((float) oponentCellsCounter * 2) / 100);
+        ifPlayerHaveMove();
 
     }
 

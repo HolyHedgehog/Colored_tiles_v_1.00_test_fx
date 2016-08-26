@@ -1,0 +1,7 @@
+.player.progress-bar .bar {
+    -fx-background-color: darkorange;
+}
+
+.oponent.progress-bar .bar {
+    -fx-background-color: darkgreen;
+}
