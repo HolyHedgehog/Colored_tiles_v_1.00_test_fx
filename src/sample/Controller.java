@@ -230,7 +230,7 @@ public class Controller {
         }
     }
 
-    private boolean ifPlayerHaveMove() {
+    public void ifPlayerHaveMove() {
         playerHasMove = new int[COLORQUANTITY];
         for (int i = 0; i < COLORQUANTITY; i++) {
             for (ColorCell cell : getCellsForPlayer(playerStartCell.getOwner())) {
@@ -238,15 +238,16 @@ public class Controller {
             }
         }
         System.out.println(Arrays.toString(playerHasMove));
-        if ((playerHasMove[0] == 0)
-                && (playerHasMove[1] == 0)
-                && (playerHasMove[2] == 0)
-                && (playerHasMove[3] == 0)
-                && (playerHasMove[4] == 0)
-                && (playerHasMove[5] == 0)) {
-            return false;
-        }
-        return true;
+        System.out.println(Arrays.toString(perfmove));
+        // if ((playerHasMove[0] == 0)
+        // && (playerHasMove[1] == 0)
+        // && (playerHasMove[2] == 0)
+        // && (playerHasMove[3] == 0)
+        // && (playerHasMove[4] == 0)
+        // && (playerHasMove[5] == 0)) {
+        // return false;
+        // }
+        // return true;
     }
 
     // отсчитываем кол-во ходов.
@@ -300,7 +301,7 @@ public class Controller {
                 + (100 - (oponentCellsCounter + playerCellsCounter)));
         player_bar.setProgress(((float) playerCellsCounter * 2) / 100);
         oponent_bar.setProgress(((float) oponentCellsCounter * 2) / 100);
-        ifPlayerHaveMove();
+        // ifPlayerHaveMove();
 
     }
 
