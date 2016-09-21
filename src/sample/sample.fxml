@@ -22,9 +22,6 @@
             <children>
                 <Button fx:id="initializeField" onAction="#newGameStart" text="Новая игра" textAlignment="CENTER">
                 </Button>
-                <Button fx:id="node" onAction="#ifPlayerHaveMove" text="test" textAlignment="CENTER" layoutY="0"
-                        layoutX="60">
-                </Button>
                 <Label fx:id="label1" layoutY="40" prefHeight="160.0" prefWidth="200.0" wrapText="true"/>
                 <ProgressBar fx:id="oponent_bar" layoutY="177.0" prefWidth="200.0" progress="0.0" styleClass="oponent"/>
                 <ProgressBar fx:id="player_bar" layoutY="159.0" prefWidth="200.0" progress="0.0" styleClass="player"/>
