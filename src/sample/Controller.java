@@ -1,7 +1,6 @@
 package sample;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -30,6 +29,15 @@ public class Controller {
     private static int[] perfmove = new int[COLORQUANTITY];
 
     private static int[] playerHasMove = new int[COLORQUANTITY];
+
+    // отсчитываем кол-во ходов.
+    private static int moveCounter = 0;
+
+    // отсчитываем кол-во захваченных ячеек.
+    private static int playerCellsCounter;
+
+    // отсчитываем кол-во захваченных ячеек.
+    private static int oponentCellsCounter;
 
     // корневой компонент
     public Pane parrentPane;
@@ -132,19 +140,19 @@ public class Controller {
         int x = cell.getxCoord();
         int y = cell.getyCoord();
 
-        if ((x - 1 >= 0) && CanCellChange(x - 1, y, color)) {
-            CellChange(x - 1, y, color, owner);
+        if ((x - 1 >= 0) && canCellChange(x - 1, y, color)) {
+            cellChange(x - 1, y, color, owner);
         }
-        if ((x + 1 <= 9) && CanCellChange(x + 1, y, color)) {
-            CellChange(x + 1, y, color, owner);
-        }
-
-        if ((y - 1 >= 0) && CanCellChange(x, y - 1, color)) {
-            CellChange(x, y - 1, color, owner);
+        if ((x + 1 <= 9) && canCellChange(x + 1, y, color)) {
+            cellChange(x + 1, y, color, owner);
         }
 
-        if ((y + 1 <= 9) && CanCellChange(x, y + 1, color)) {
-            CellChange(x, y + 1, color, owner);
+        if ((y - 1 >= 0) && canCellChange(x, y - 1, color)) {
+            cellChange(x, y - 1, color, owner);
+        }
+
+        if ((y + 1 <= 9) && canCellChange(x, y + 1, color)) {
+            cellChange(x, y + 1, color, owner);
         }
     }
 
@@ -164,14 +172,14 @@ public class Controller {
         return result;
     }
 
-    private boolean CanCellChange(final int x, final int y, final int color) {
+    private boolean canCellChange(final int x, final int y, final int color) {
 
         return (gameFieldButtons[x][y].getOwner() == ColorCell.Property.NEUTRAL)
                 && (gameFieldButtons[x][y].getColor() == color)
                 && !(gameFieldButtons[x][y].isChanged());
     }
 
-    private void CellChange(final int x, final int y, final int color, final int owner) {
+    private void cellChange(final int x, final int y, final int color, final int owner) {
         switch (owner) {
             case 1:
                 playerCellsCounter++;
@@ -193,7 +201,6 @@ public class Controller {
         int result = 0;
         int index;
         perfectMove();
-        setAllCellsUnchanged();
         int ciclecounter = 0; /// костыль от вечных циклов
 
         do {
@@ -228,60 +235,31 @@ public class Controller {
                 recurseMove(cell, i, ColorCell.Property.NEUTRAL);
             }
         }
+        setAllCellsUnchanged();
     }
 
-    public void ifPlayerHaveMove() {
+    public boolean ifPlayerHaveMove() {
         playerHasMove = new int[COLORQUANTITY];
         for (int i = 0; i < COLORQUANTITY; i++) {
             for (ColorCell cell : getCellsForPlayer(playerStartCell.getOwner())) {
                 recurseMove(cell, i, ColorCell.Property.NEUTRAL);
             }
         }
-        System.out.println(Arrays.toString(playerHasMove));
-        System.out.println(Arrays.toString(perfmove));
-        // if ((playerHasMove[0] == 0)
-        // && (playerHasMove[1] == 0)
-        // && (playerHasMove[2] == 0)
-        // && (playerHasMove[3] == 0)
-        // && (playerHasMove[4] == 0)
-        // && (playerHasMove[5] == 0)) {
-        // return false;
-        // }
-        // return true;
+        setAllCellsUnchanged();
+        if ((playerHasMove[0] == 0)
+                && (playerHasMove[1] == 0)
+                && (playerHasMove[2] == 0)
+                && (playerHasMove[3] == 0)
+                && (playerHasMove[4] == 0)
+                && (playerHasMove[5] == 0)) {
+            return false;
+        }
+        return true;
     }
 
-    // отсчитываем кол-во ходов.
-    private static int moveCounter = 0;
-
-    // отсчитываем кол-во захваченных ячеек.
-    private static int playerCellsCounter;
-
-    // отсчитываем кол-во захваченных ячеек.
-    private static int oponentCellsCounter;
-
     private void printStatus() {
-        // вариант рабочий, но в целях оптимизации попробую пробросить из рекурсмува.
-        // получилось. не высчитываем каждый раз количество ячеек, а берём значение формирующиеся с учетом вызовов
-        // CellChange()
-        // int a = 0, oponentCellsCounter = 0, c = 0;
-        // for (Node x : gameField.getChildren()) {
-        // if (x instanceof ColorCell) {
-        // switch (((ColorCell) x).getOwner()) {
-        // case 1:
-        // a++;
-        // break;
-        // case 2:
-        // oponentCellsCounter++;
-        // break;
-        // case 0:
-        // c++;
-        // break;
-        // default:
-        // System.out.println("ерунда какая то. не должно так быть.Controller#printStatus");
-        // }
-        // }
-        // }
         System.out.println("Move №" + moveCounter);
+        System.out.println("Player have chance to move: " + ifPlayerHaveMove());
         System.out.println("Player - "
                 + playerCellsCounter
                 + "\n\r"
@@ -301,8 +279,6 @@ public class Controller {
                 + (100 - (oponentCellsCounter + playerCellsCounter)));
         player_bar.setProgress(((float) playerCellsCounter * 2) / 100);
         oponent_bar.setProgress(((float) oponentCellsCounter * 2) / 100);
-        // ifPlayerHaveMove();
-
     }
 
 }
