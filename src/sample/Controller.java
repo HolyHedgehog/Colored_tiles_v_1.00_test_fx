@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class Controller {
+
+    public static Controller ControlRef;
 
     private static final int COLORQUANTITY = 6;
 
@@ -49,7 +53,7 @@ public class Controller {
     public Pane controlButtonsPane;
 
     // компонента с кнопками вариантов хода
-    public FlowPane moveButtons;
+    public HBox moveButtons;
 
     // кнопка из controlButtonsPane
     public Button initializeField;
@@ -60,6 +64,22 @@ public class Controller {
     public ProgressBar oponent_bar;
 
     public ProgressBar player_bar;
+
+    public Button magentaButMove;
+
+    public Button redButMove;
+
+    public Button greenButMove;
+
+    public Button yellowButMove;
+
+    public Button blueButMove;
+
+    public Button cyanButMove;
+
+    {
+        ControlRef = this;
+    }
 
     /*
      * Создаём кнопки поля, и помещяем их на панель.
@@ -95,10 +115,22 @@ public class Controller {
 
         recurseMove(playerStartCell, playerStartCell.getColor(), ColorCell.Property.PLAYER);
         recurseMove(oponentStartCell, oponentStartCell.getColor(), ColorCell.Property.OPONENT);
+
     }
 
     private FlowPane getGameField() {
         return gameField;
+    }
+
+    public void addButton(final ActionEvent event) {
+        moveButtons.getChildren().clear();
+
+        moveButtons.getChildren().add(magentaButMove);
+        moveButtons.getChildren().add(redButMove);
+        moveButtons.getChildren().add(greenButMove);
+        moveButtons.getChildren().add(blueButMove);
+        moveButtons.getChildren().add(yellowButMove);
+        moveButtons.getChildren().add(cyanButMove);
     }
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
@@ -107,7 +139,9 @@ public class Controller {
                 && (clickedCell.getColor() != oponentStartCell.getColor())) {
             moveCounter++;
             preRecurseMove(clickedCell.getColor(), ColorCell.Property.PLAYER);
+            setAllCellsUnchanged();
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
+            setAllCellsUnchanged();
             printStatus();
         }
     }
@@ -131,7 +165,6 @@ public class Controller {
             cell.refresh();
             recurseMove(cell, color, owner);
         }
-        setAllCellsUnchanged();
     }
 
     // дальше определяем какие соседние клетки можно отожрать.
@@ -279,6 +312,41 @@ public class Controller {
                 + (100 - (oponentCellsCounter + playerCellsCounter)));
         player_bar.setProgress(((float) playerCellsCounter * 2) / 100);
         oponent_bar.setProgress(((float) oponentCellsCounter * 2) / 100);
+    }
+
+    public void moveFromButtonClick(final int color) {
+        if ((color != playerStartCell.getColor()) && (color != oponentStartCell.getColor())) {
+            moveCounter++;
+            preRecurseMove(color, ColorCell.Property.PLAYER);
+            setAllCellsUnchanged();
+            preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
+            setAllCellsUnchanged();
+            printStatus();
+        }
+    }
+
+    public void magentaButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(4);
+    }
+
+    public void redButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(0);
+    }
+
+    public void greenButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(1);
+    }
+
+    public void yellowButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(5);
+    }
+
+    public void blueButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(2);
+    }
+
+    public void cyanButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(3);
     }
 
 }

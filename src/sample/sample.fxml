@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <AnchorPane fx:id="parrentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0"
             minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../resourse/css/test.css"
@@ -13,18 +14,29 @@
         <FlowPane fx:id="gameField" maxHeight="Infinity" maxWidth="Infinity" minHeight="400" minWidth="400"
                   prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                   AnchorPane.topAnchor="0.0"/>
-        <FlowPane fx:id="moveButtons" layoutX="400.0" layoutY="200.0" maxHeight="1.7976931348623157E308"
-                  maxWidth="200.0" minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0"
-                  AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-        <Pane fx:id="controlButtonsPane" layoutX="400.0" maxHeight="1.7976931348623157E308" maxWidth="200.0"
-              minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0"
+        <HBox fx:id="moveButtons" fillHeight="false" layoutX="400.0" layoutY="272.0" maxHeight="200.0" maxWidth="200.0"
+              minHeight="128.0" minWidth="200.0" prefHeight="128.0" prefWidth="200.0">
+            <children>
+                <Button fx:id="magentaButMove" mnemonicParsing="false" onAction="#magentaButtonClicked" text="magenta"/>
+                <Button fx:id="redButMove" mnemonicParsing="false" onAction="#redButtonClicked" text="red"/>
+                <Button fx:id="greenButMove" mnemonicParsing="false" onAction="#greenButtonClicked" text="green"/>
+                <Button fx:id="yellowButMove" mnemonicParsing="false" onAction="#yellowButtonClicked" text="yellow"/>
+                <Button fx:id="blueButMove" mnemonicParsing="false" onAction="#blueButtonClicked" text="blue"/>
+                <Button fx:id="cyanButMove" mnemonicParsing="false" onAction="#cyanButtonClicked" text="cian"/>
+            </children>
+        </HBox>
+        <Pane fx:id="controlButtonsPane" layoutX="393.0" maxHeight="1.7976931348623157E308" maxWidth="200.0"
+              minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="1.0"
               AnchorPane.topAnchor="0.0">
             <children>
                 <Button fx:id="initializeField" onAction="#newGameStart" text="Новая игра" textAlignment="CENTER">
                 </Button>
-                <Label fx:id="label1" layoutY="40" prefHeight="160.0" prefWidth="200.0" wrapText="true"/>
-                <ProgressBar fx:id="oponent_bar" layoutY="177.0" prefWidth="200.0" progress="0.0" styleClass="oponent"/>
-                <ProgressBar fx:id="player_bar" layoutY="159.0" prefWidth="200.0" progress="0.0" styleClass="player"/>
+                <Label fx:id="label1" layoutY="114.0" prefHeight="72.0" prefWidth="200.0" wrapText="true"/>
+                <ProgressBar fx:id="oponent_bar" layoutY="53.0" prefHeight="25.0" prefWidth="200.0" progress="0.0"
+                             styleClass="oponent"/>
+                <ProgressBar fx:id="player_bar" layoutY="28.0" prefHeight="25.0" prefWidth="200.0" progress="0.0"
+                             styleClass="player"/>
+                <Button fx:id="addbut" layoutY="78.0" mnemonicParsing="false" onAction="#addButton" text="Button"/>
             </children>
         </Pane>
     </children>
