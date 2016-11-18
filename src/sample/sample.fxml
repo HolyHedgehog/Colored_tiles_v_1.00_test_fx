@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <AnchorPane fx:id="parrentPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0"
             minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../resourse/css/test.css"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
@@ -36,7 +31,7 @@
                              styleClass="oponent"/>
                 <ProgressBar fx:id="player_bar" layoutY="28.0" prefHeight="25.0" prefWidth="200.0" progress="0.0"
                              styleClass="player"/>
-                <Button fx:id="addbut" layoutY="78.0" mnemonicParsing="false" onAction="#addButton" text="Button"/>
+                <Button fx:id="addbut" layoutY="78.0" mnemonicParsing="false" onAction="#addButton" text="addButtons"/>
             </children>
         </Pane>
     </children>

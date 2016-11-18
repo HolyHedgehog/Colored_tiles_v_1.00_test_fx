@@ -3,11 +3,10 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
-        <entry key="active-configuration" value="LOCAL_FILE:C:/projects/TN/Base/Dev047-RC/BuildTools/src/main/resources/checkstyle/tn_checkstyle.xml:123" />
+        <entry key="active-configuration" value="CLASSPATH:/sun_checks.xml:The default Checkstyle rules" />
         <entry key="check-nonjava-files" value="false" />
         <entry key="check-test-classes" value="false" />
-        <entry key="location-0" value="CLASSPATH:/sun_checks.xml:The default CheckStyle rules" />
-        <entry key="location-1" value="LOCAL_FILE:C:/projects/TN/Base/Dev047-RC/BuildTools/src/main/resources/checkstyle/tn_checkstyle.xml:123" />
+        <entry key="location-0" value="CLASSPATH:/sun_checks.xml:The default Checkstyle rules" />
         <entry key="scan-before-checkin" value="false" />
         <entry key="suppress-errors" value="false" />
         <entry key="thirdparty-classpath" value="" />

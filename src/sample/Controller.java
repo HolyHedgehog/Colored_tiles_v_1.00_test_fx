@@ -1,10 +1,7 @@
 package sample;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +10,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Controller {
 
@@ -97,7 +98,12 @@ public class Controller {
 
                 ColorCell newCell = new ColorCell(i, j, randGen.nextInt(COLORQUANTITY));
                 gameFieldButtons[i][j] = newCell;
-                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> onClickButton(newCell));
+                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        Controller.this.onClickButton(newCell);
+                    }
+                });
                 gameField.getChildren().add(newCell);
 
             }
@@ -116,6 +122,8 @@ public class Controller {
         recurseMove(playerStartCell, playerStartCell.getColor(), ColorCell.Property.PLAYER);
         recurseMove(oponentStartCell, oponentStartCell.getColor(), ColorCell.Property.OPONENT);
 
+        printStatus();
+
     }
 
     private FlowPane getGameField() {
@@ -125,12 +133,13 @@ public class Controller {
     public void addButton(final ActionEvent event) {
         moveButtons.getChildren().clear();
 
-        moveButtons.getChildren().add(magentaButMove);
         moveButtons.getChildren().add(redButMove);
         moveButtons.getChildren().add(greenButMove);
         moveButtons.getChildren().add(blueButMove);
-        moveButtons.getChildren().add(yellowButMove);
         moveButtons.getChildren().add(cyanButMove);
+        moveButtons.getChildren().add(magentaButMove);
+        moveButtons.getChildren().add(yellowButMove);
+
     }
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
@@ -279,15 +288,12 @@ public class Controller {
             }
         }
         setAllCellsUnchanged();
-        if ((playerHasMove[0] == 0)
+        return !((playerHasMove[0] == 0)
                 && (playerHasMove[1] == 0)
                 && (playerHasMove[2] == 0)
                 && (playerHasMove[3] == 0)
                 && (playerHasMove[4] == 0)
-                && (playerHasMove[5] == 0)) {
-            return false;
-        }
-        return true;
+                && (playerHasMove[5] == 0));
     }
 
     private void printStatus() {
