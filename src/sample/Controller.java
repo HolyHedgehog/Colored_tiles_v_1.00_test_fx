@@ -1,5 +1,9 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -10,10 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Controller {
 
@@ -66,17 +66,17 @@ public class Controller {
 
     public ProgressBar player_bar;
 
-    public Button magentaButMove;
+    public MoveButton magentaButMove;
 
-    public Button redButMove;
+    public MoveButton redButMove;
 
-    public Button greenButMove;
+    public MoveButton greenButMove;
 
-    public Button yellowButMove;
+    public MoveButton yellowButMove;
 
-    public Button blueButMove;
+    public MoveButton blueButMove;
 
-    public Button cyanButMove;
+    public MoveButton cyanButMove;
 
     {
         ControlRef = this;
@@ -96,7 +96,7 @@ public class Controller {
         for (int i = 0; i < FIELDSIZE; i++) {
             for (int j = 0; j < FIELDSIZE; j++) {
 
-                ColorCell newCell = new ColorCell(i, j, randGen.nextInt(COLORQUANTITY));
+                final ColorCell newCell = new ColorCell(i, j, randGen.nextInt(COLORQUANTITY));
                 gameFieldButtons[i][j] = newCell;
                 newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                     @Override
@@ -123,6 +123,7 @@ public class Controller {
         recurseMove(oponentStartCell, oponentStartCell.getColor(), ColorCell.Property.OPONENT);
 
         printStatus();
+        deleteButtons();
 
     }
 
@@ -152,7 +153,26 @@ public class Controller {
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
             setAllCellsUnchanged();
             printStatus();
+            // добавить все кнопки, и убрать кнопки по выбранным цветам после хода.
+            // addButton(null);
+            deleteButtons();
+
         }
+    }
+
+    private void deleteButtons() {
+        for (Node x : moveButtons.getChildren()) {
+            if (x instanceof MoveButton) {
+                MoveButton buf = (MoveButton) x;
+                if ((buf.getButtonColor() == playerStartCell.getColor())
+                        || (buf.getButtonColor() == oponentStartCell.getColor())) {
+                    buf.setVisible(false);
+                } else {
+                    buf.setVisible(true);
+                }
+            }
+        }
+        // moveButtons.getChildren().clear();
     }
 
     private List<ColorCell> getCellsForPlayer(final int owner) {
@@ -174,6 +194,7 @@ public class Controller {
             cell.refresh();
             recurseMove(cell, color, owner);
         }
+
     }
 
     // дальше определяем какие соседние клетки можно отожрать.
@@ -331,10 +352,6 @@ public class Controller {
         }
     }
 
-    public void magentaButtonClicked(final ActionEvent actionEvent) {
-        moveFromButtonClick(4);
-    }
-
     public void redButtonClicked(final ActionEvent actionEvent) {
         moveFromButtonClick(0);
     }
@@ -343,16 +360,20 @@ public class Controller {
         moveFromButtonClick(1);
     }
 
-    public void yellowButtonClicked(final ActionEvent actionEvent) {
-        moveFromButtonClick(5);
-    }
-
     public void blueButtonClicked(final ActionEvent actionEvent) {
         moveFromButtonClick(2);
     }
 
     public void cyanButtonClicked(final ActionEvent actionEvent) {
         moveFromButtonClick(3);
+    }
+
+    public void magentaButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(4);
+    }
+
+    public void yellowButtonClicked(final ActionEvent actionEvent) {
+        moveFromButtonClick(5);
     }
 
 }
