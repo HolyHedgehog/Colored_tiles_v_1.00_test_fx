@@ -1,11 +1,6 @@
 package sample;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Controller {
 
@@ -78,6 +77,8 @@ public class Controller {
 
     public MoveButton cyanButMove;
 
+    public MoveButton[] buttonCache;
+
     {
         ControlRef = this;
     }
@@ -86,6 +87,8 @@ public class Controller {
      * Создаём кнопки поля, и помещяем их на панель.
      */
     public void newGameStart() {
+        buttonCache = new MoveButton[]{redButMove, greenButMove, blueButMove, cyanButMove, magentaButMove, yellowButMove};
+
         moveCounter = 0;
         playerCellsCounter = 1;
         oponentCellsCounter = 1;
@@ -98,12 +101,7 @@ public class Controller {
 
                 final ColorCell newCell = new ColorCell(i, j, randGen.nextInt(COLORQUANTITY));
                 gameFieldButtons[i][j] = newCell;
-                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent event) {
-                        Controller.this.onClickButton(newCell);
-                    }
-                });
+                newCell.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> Controller.this.onClickButton(newCell));
                 gameField.getChildren().add(newCell);
 
             }
@@ -131,17 +129,7 @@ public class Controller {
         return gameField;
     }
 
-    public void addButton(final ActionEvent event) {
-        moveButtons.getChildren().clear();
 
-        moveButtons.getChildren().add(redButMove);
-        moveButtons.getChildren().add(greenButMove);
-        moveButtons.getChildren().add(blueButMove);
-        moveButtons.getChildren().add(cyanButMove);
-        moveButtons.getChildren().add(magentaButMove);
-        moveButtons.getChildren().add(yellowButMove);
-
-    }
 
     // обработчик нажатия на кнопки поля. запускается просчет хода игрока с цветом нажатой кнопки
     private void onClickButton(final ColorCell clickedCell) {
@@ -159,16 +147,13 @@ public class Controller {
     }
 
     private void deleteButtons() {
-        for (Node x : moveButtons.getChildren()) {
-            if (x instanceof MoveButton) {
-                MoveButton buf = (MoveButton) x;
-                if ((buf.getButtonColor() == playerStartCell.getColor())
-                        || (buf.getButtonColor() == oponentStartCell.getColor())) {
-                    buf.setVisible(false);
-                } else {
-                    buf.setVisible(true);
+        moveButtons.getChildren().clear();
+        for (MoveButton x : buttonCache) {
+            if (!((x.getButtonColor() == playerStartCell.getColor())
+                    || (x.getButtonColor() == oponentStartCell.getColor()))) {
+                moveButtons.getChildren().add(x);
                 }
-            }
+
         }
     }
 
