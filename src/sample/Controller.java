@@ -153,8 +153,6 @@ public class Controller {
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
             setAllCellsUnchanged();
             printStatus();
-            // добавить все кнопки, и убрать кнопки по выбранным цветам после хода.
-            // addButton(null);
             deleteButtons();
 
         }
@@ -172,7 +170,6 @@ public class Controller {
                 }
             }
         }
-        // moveButtons.getChildren().clear();
     }
 
     private List<ColorCell> getCellsForPlayer(final int owner) {
@@ -349,6 +346,7 @@ public class Controller {
             preRecurseMove(getPerfMove(), ColorCell.Property.OPONENT);
             setAllCellsUnchanged();
             printStatus();
+            deleteButtons();
         }
     }
 

@@ -22,32 +22,38 @@
                 <MoveButton fx:id="redButMove"
                             mnemonicParsing="false"
                             onAction="#redButtonClicked"
-                            text="red" buttonColor="0"
+                            text="R" buttonColor="0"
+                            style="-fx-background-color:#8c0c0a"
                 />
                 <MoveButton fx:id="greenButMove"
                             mnemonicParsing="false"
                             onAction="#greenButtonClicked"
-                            text="green" buttonColor="1"
+                            text="G" buttonColor="1"
+                            style="-fx-background-color:green"
                 />
                 <MoveButton fx:id="blueButMove"
                             mnemonicParsing="false"
                             onAction="#blueButtonClicked"
-                            text="blue" buttonColor="2"
+                            text="B" buttonColor="2"
+                            style="-fx-background-color:#000084"
                 />
                 <MoveButton fx:id="cyanButMove"
                             mnemonicParsing="false"
                             onAction="#cyanButtonClicked"
-                            text="cian" buttonColor="3"
+                            text="C" buttonColor="3"
+                            style="-fx-background-color:#46b9b7"
                 />
                 <MoveButton fx:id="magentaButMove"
                             mnemonicParsing="false"
                             onAction="#magentaButtonClicked"
-                            text="magenta" buttonColor="4"
+                            text="M" buttonColor="4"
+                            style="-fx-background-color:#950095"
                 />
                 <MoveButton fx:id="yellowButMove"
                             mnemonicParsing="false"
                             onAction="#yellowButtonClicked"
-                            text="yellow" buttonColor="5"
+                            text="Y" buttonColor="5"
+                            style="-fx-background-color:#959500"
                 />
             </children>
         </HBox>
