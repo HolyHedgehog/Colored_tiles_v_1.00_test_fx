@@ -3,94 +3,108 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.*?>
-<?import sample.*?>
-<AnchorPane fx:id="parrentPane" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.Controller"
-            stylesheets="@../resourse/css/test.css"
->
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import sample.MoveButton?>
+<AnchorPane fx:id="parrentPane"
+            maxHeight="410.0" maxWidth="615.0"
+            minHeight="410.0" minWidth="615.0"
+            prefHeight="410.0"
+            prefWidth="615.0" stylesheets="@../resourse/css/test.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-        <FlowPane fx:id="gameField" maxHeight="Infinity" maxWidth="Infinity" minHeight="400" minWidth="400"
-                  prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                  AnchorPane.topAnchor="0.0"/>
-        <HBox fx:id="moveButtons" fillHeight="true" layoutX="400.0" layoutY="200" maxHeight="200.0" maxWidth="200.0"
-              minHeight="200.0" minWidth="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.rightAnchor="0.0">
+        <FlowPane fx:id="gameField"
+                  maxHeight="Infinity" maxWidth="Infinity"
+                  minHeight="400" minWidth="400"
+
+                  prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
+                  AnchorPane.topAnchor="5.0"/>
+        <HBox fx:id="moveButtons" fillHeight="true"
+              maxHeight="200.0" maxWidth="200.0"
+              minHeight="200.0"
+              minWidth="200.0"
+              prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0"
+              AnchorPane.rightAnchor="5.0">
             <children>
                 <MoveButton fx:id="redButMove"
+                            buttonColor="0"
+                            maxHeight="200.0"
+                            minHeight="200.0"
                             mnemonicParsing="false"
                             onAction="#redButtonClicked"
-                            text="R" buttonColor="0"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:#8c0c0a"
+                            text="R"/>
+                <MoveButton fx:id="greenButMove"
+                            buttonColor="1"
                             maxHeight="200.0"
                             minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
-                <MoveButton fx:id="greenButMove"
                             mnemonicParsing="false"
                             onAction="#greenButtonClicked"
-                            text="G" buttonColor="1"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:green"
+                            text="G"/>
+                <MoveButton fx:id="blueButMove"
+                            buttonColor="2"
                             maxHeight="200.0"
                             minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
-                <MoveButton fx:id="blueButMove"
                             mnemonicParsing="false"
                             onAction="#blueButtonClicked"
-                            text="B" buttonColor="2"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:#000084"
+                            text="B"/>
+                <MoveButton fx:id="cyanButMove"
+                            buttonColor="3"
                             maxHeight="200.0"
                             minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
-                <MoveButton fx:id="cyanButMove"
                             mnemonicParsing="false"
                             onAction="#cyanButtonClicked"
-                            text="C" buttonColor="3"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:#46b9b7"
+                            text="C"/>
+                <MoveButton fx:id="magentaButMove"
+                            buttonColor="4"
                             maxHeight="200.0"
                             minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
-                <MoveButton fx:id="magentaButMove"
                             mnemonicParsing="false"
                             onAction="#magentaButtonClicked"
-                            text="M" buttonColor="4"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:#950095"
+                            text="M"/>
+                <MoveButton fx:id="yellowButMove"
+                            buttonColor="5"
                             maxHeight="200.0"
                             minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
-                <MoveButton fx:id="yellowButMove"
                             mnemonicParsing="false"
                             onAction="#yellowButtonClicked"
-                            text="Y" buttonColor="5"
+                            prefHeight="200.0" prefWidth="50"
                             style="-fx-background-color:#959500"
-                            maxHeight="200.0"
-                            minHeight="200.0"
-                            prefHeight="200.0"
-                            prefWidth="50"
-                />
+                            text="Y"/>
             </children>
         </HBox>
-        <Pane fx:id="controlButtonsPane" maxHeight="1.7976931348623157E308" maxWidth="200.0" minHeight="200.0"
-              minWidth="200.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="0.0">
+        <Pane fx:id="controlButtonsPane"
+              maxHeight="1.7976931348623157E308" maxWidth="200.0"
+              minHeight="200.0"
+              minWidth="200.0"
+              prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="5.0"
+              AnchorPane.topAnchor="5.0">
             <children>
-                <Button fx:id="initializeField" layoutX="5.0" layoutY="2.0" onAction="#newGameStart" text="Новая игра"
+                <Button fx:id="initializeField" layoutX="5.0" layoutY="2.0"
+                        onAction="#newGameStart"
+                        text="Новая игра"
+
                         textAlignment="CENTER">
                 </Button>
-                <Label fx:id="label1" layoutY="114.0" prefHeight="72.0" prefWidth="200.0" wrapText="true"/>
-                <ProgressBar fx:id="oponent_bar" layoutY="53.0" prefHeight="25.0" prefWidth="200.0" progress="0.0"
+                <Label fx:id="label1" layoutY="114.0"
+                       prefHeight="72.0" prefWidth="200.0"
+                       wrapText="true"/>
+                <ProgressBar fx:id="oponent_bar" layoutY="53.0"
+                             prefHeight="25.0" prefWidth="200.0" progress="0.0"
                              styleClass="oponent"/>
-                <ProgressBar fx:id="player_bar" layoutY="28.0" prefHeight="25.0" prefWidth="200.0" progress="0.0"
+                <ProgressBar fx:id="player_bar" layoutY="28.0"
+                             prefHeight="25.0" prefWidth="200.0" progress="0.0"
                              styleClass="player"/>
             </children>
         </Pane>
