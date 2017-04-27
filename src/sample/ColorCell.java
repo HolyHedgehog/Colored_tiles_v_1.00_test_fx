@@ -21,30 +21,28 @@ class ColorCell extends Button {
         yCoord = y;
         this.color = color;
 
-        this.setStyle("-fx-border-color: black;-fx-border-width: 10");
-
         this.setPrefSize(40, 40);
         switch (color) {
             case 0:
-                this.setStyle("-fx-background-color:#8c0c0a;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("RedCell");
                 break;
             case 1:
-                this.setStyle("-fx-background-color:green;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("GreenCell");
                 break;
             case 2:
-                this.setStyle("-fx-background-color:#000084;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("BlueCell");
                 break;
             case 3:
-                this.setStyle("-fx-background-color:#46b9b7;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("CyanCell");
                 break;
             case 4:
-                this.setStyle("-fx-background-color:#950095;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("MagentaCell");
                 break;
             case 5:
-                this.setStyle("-fx-background-color:#959500;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("YellowCell");
                 break;
             default:
-                this.setStyle("-fx-background-color:black;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("DefaultCell");
                 break;
         }
     }
@@ -82,27 +80,28 @@ class ColorCell extends Button {
     }
 
     public void refresh() {
+        this.getStyleClass().clear();
         switch (color) {
             case 0:
-                this.setStyle("-fx-background-color:#8c0c0a;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("RedCell");
                 break;
             case 1:
-                this.setStyle("-fx-background-color:green;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("GreenCell");
                 break;
             case 2:
-                this.setStyle("-fx-background-color:#000084;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("BlueCell");
                 break;
             case 3:
-                this.setStyle("-fx-background-color:#46b9b7;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("CyanCell");
                 break;
             case 4:
-                this.setStyle("-fx-background-color:#950095;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("MagentaCell");
                 break;
             case 5:
-                this.setStyle("-fx-background-color:#959500;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("YellowCell");
                 break;
             default:
-                this.setStyle("-fx-background-color:black;-fx-border-color: black;-fx-border-width: 0.5");
+                this.getStyleClass().add("DefaultCell");
                 break;
         }
     }

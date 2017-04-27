@@ -5,3 +5,45 @@
 .oponent.progress-bar .bar {
     -fx-background-color: darkgreen;
 }
+
+.RedCell {
+    -fx-background-color: #8c0c0a;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.GreenCell {
+    -fx-background-color: green;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.BlueCell {
+    -fx-background-color: #000084;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.CyanCell {
+    -fx-background-color: #46b9b7;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.MagentaCell {
+    -fx-background-color: #950095;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.YellowCell {
+    -fx-background-color: #959500;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
+
+.DefaultCell {
+    -fx-background-color: black;
+    -fx-border-color: black;
+    -fx-border-width: 0.5
+}
