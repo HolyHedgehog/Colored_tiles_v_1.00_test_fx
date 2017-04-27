@@ -1,5 +1,9 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -9,10 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class Controller {
 
@@ -76,6 +76,8 @@ public class Controller {
     public MoveButton blueButMove;
 
     public MoveButton cyanButMove;
+
+    public Button testButton;
 
     public MoveButton[] buttonCache;
 
